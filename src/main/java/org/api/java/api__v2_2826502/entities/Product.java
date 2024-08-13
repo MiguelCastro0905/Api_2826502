@@ -1,7 +1,12 @@
 package org.api.java.api__v2_2826502.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @ToString
 @NoArgsConstructor
@@ -16,8 +21,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Nombre no debe tener espacios en blanco")
+    @NotEmpty(message = "Nombre no puede estar vacio")
     private String name;
+
+    @Size(min = 10, max = 20, message = "descripcion fuera de rango")
     private String description;
+
+    @Min(10)
     private Double price;
 
     public Long getId() {
